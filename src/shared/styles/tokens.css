@@ -1,0 +1,91 @@
+/* Design tokens todoagent — mengikuti tabel design token PRD bagian 8.2 */
+:root {
+  --color-bg: #ffffff;
+  --color-bg-subtle: #f4f4f5;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f8f8fa;
+  --color-border: #e4e4e7;
+  --color-border-strong: #d4d4d8;
+  --color-text: #18181b;
+  --color-text-muted: #71717a;
+  --color-text-faint: #a1a1aa;
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-primary-fg: #ffffff;
+  --color-accent: #7c3aed;
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-danger: #dc2626;
+  --color-danger-hover: #b91c1c;
+  --color-focus-ring: #2563eb;
+
+  --color-priority-low: #16a34a;
+  --color-priority-medium: #d97706;
+  --color-priority-high: #dc2626;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 2px rgba(24, 24, 27, 0.06);
+  --shadow-md: 0 4px 12px rgba(24, 24, 27, 0.08);
+  --shadow-lg: 0 12px 32px rgba(24, 24, 27, 0.12);
+
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 280ms;
+}
+
+html.dark {
+  --color-bg: #0b0b0f;
+  --color-bg-subtle: #131318;
+  --color-surface: #18181d;
+  --color-surface-hover: #202027;
+  --color-border: #2a2a31;
+  --color-border-strong: #3a3a43;
+  --color-text: #f4f4f5;
+  --color-text-muted: #a1a1aa;
+  --color-text-faint: #71717a;
+  --color-primary: #60a5fa;
+  --color-primary-hover: #93c5fd;
+  --color-primary-fg: #0b0b0f;
+  --color-accent: #a78bfa;
+  --color-success: #4ade80;
+  --color-warning: #fbbf24;
+  --color-danger: #f87171;
+  --color-danger-hover: #fca5a5;
+  --color-focus-ring: #93c5fd;
+
+  --color-priority-low: #4ade80;
+  --color-priority-medium: #fbbf24;
+  --color-priority-high: #f87171;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
+}
+
+/*
+ * Saat `prefers-reduced-motion: reduce` aktif, transisi dimatikan total.
+ * Inline script di layout akan menambahkan class `reduce-motion` pada <html>
+ * SEBELUM paint sehingga tidak ada animasi tema saat awal muat maupun setelahnya.
+ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-base: 0ms;
+    --dur-slow: 0ms;
+  }
+}
+
+html.reduce-motion,
+html.reduce-motion * {
+  --dur-fast: 0ms;
+  --dur-base: 0ms;
+  --dur-slow: 0ms;
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
