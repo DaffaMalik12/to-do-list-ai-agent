@@ -1,17 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
-  turbopack: {
-    rules: {
-      "*.css": {
-        loaders: ["@tailwindcss/turbopack"],
-        as: "*.css",
-      },
-    },
-  },
+  // better-sqlite3 adalah native module: jangan di-bundle oleh Next.js.
+  serverExternalPackages: ["better-sqlite3"],
 };
 
 export default nextConfig;
