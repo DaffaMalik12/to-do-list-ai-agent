@@ -1,9 +1,4 @@
 import { z } from "zod";
-import type { Task, TaskPriority } from "@/features/tasks/model/task.types";
-
-export const TASK_PRIORITIES = ["low", "medium", "high"] as const;
-
-export const taskPrioritySchema = z.enum(TASK_PRIORITIES);
 
 export const taskSummarySchema = z.object({
   total: z.number().int().nonnegative(),
@@ -22,6 +17,15 @@ export const taskSchema = z.object({
   createdAt: z.string(),
   updatedAt: z.string(),
   completedAt: z.string().nullable().optional(),
+  description: z.string().nullable(),
+  completed: z.boolean(),
+  priority: taskPrioritySchema,
+  dueDate: z.string().nullable(),
+  categoryId: z.string(),
+  position: z.number(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  completedAt: z.string().nullable(),
   subtaskSummary: taskSummarySchema,
   checklistSummary: taskSummarySchema,
 });
@@ -76,4 +80,20 @@ export function parseTask(value: unknown): Task {
 
 export function isTaskPriority(value: unknown): value is TaskPriority {
   return taskPrioritySchema.safeParse(value).success;
+  
+export const taskListResultSchema = z.object({
+  items: z.array(taskSchema),
+  nextCursor: z.string().nullable(),
+});
+
+export type CreateTaskPayload = z.infer<typeof createTaskSchema>;
+export type UpdateTaskPayload = z.infer<typeof updateTaskSchema>;
+export type TaskListQuery = z.infer<typeof taskListQuerySchema>;
+
+export function isTask(value: unknown): boolean {
+  return taskSchema.safeParse(value).success;
+}
+
+export function parseTask(value: unknown) {
+  return taskSchema.parse(value);
 }
